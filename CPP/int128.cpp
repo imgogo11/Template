@@ -1,0 +1,21 @@
+ostream &operator<<(ostream &os, __int128 n) {
+    string s;
+    bool sign=true;
+    if(n==0)
+        return os << 0;
+    else if(n<0)
+        n*=-1,sign=false;;
+    while (n) {
+        s += '0' + n % 10;
+        n /= 10;
+    }
+    if(!sign) s+='-';
+    reverse(s.begin(), s.end());
+    return os << s;
+}
+istream &operator>>(istream &is, __int128 &n) {
+    ll v;
+    cin>>v;
+    n=v;
+    return is;
+}
