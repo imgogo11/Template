@@ -1,5 +1,4 @@
-struct Comb
-{
+struct Comb {
     int n;
     vector<ll> fac,invfac,inv;
     Comb() : fac{1}, invfac{1}, inv{0} {}
