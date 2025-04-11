@@ -12,8 +12,7 @@ void build() {
         for(int j=L[tot];j<=R[tot];j++) col[j]=tot;
     }
 }
-struct Query
-{
+struct Query {
     int l,r,id;
     bool operator < (const Query &A) const{
         if(col[l]!=col[A.l]) return col[l]<col[A.l];
@@ -25,8 +24,7 @@ void add(int val,ll &ans) {
     ans=max(ans,1LL*cnt[val]*x[val]);
 }
 void del(int val) {cnt[val]--;}
-void solve()
-{
+void solve() {
     cin>>n>>q;
     build();
     for(int i=1;i<=n;i++) {

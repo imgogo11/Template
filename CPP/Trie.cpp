@@ -1,6 +1,5 @@
 int t[N][65],cnt[N],idx;
-int getnum(char x)
-{
+int getnum(char x) {
     if(x>='A'&&x<='Z')
         return x-'A';
     else if(x>='a'&&x<='z')
@@ -8,8 +7,7 @@ int getnum(char x)
     else
         return x-'0'+52;
 } 
-void insert(string &str)
-{
+void insert(string &str) {
     int p=0,len=str.size();
     for(int i=0;i<len;i++)
     {
@@ -20,8 +18,7 @@ void insert(string &str)
         cnt[p]++;
     }
 }
-int find(string &str)
-{
+int find(string &str) {
     int p=0,len=str.size();
     for(int i=0;i<len;i++)
     {

@@ -1,5 +1,4 @@
-vector<int> zFunction(string &s)
-{
+vector<int> zFunction(string &s) {
     int n=s.size();
     vector<int> z(n);
     z[0]=n;
@@ -13,8 +12,7 @@ vector<int> zFunction(string &s)
     }
     return z;
 }
-vector<int> zFunction(string &s,string &p,vector<int>& z)
-{
+vector<int> zFunction(string &s,string &p,vector<int>& z) {
     int n=s.size(),m=p.size();
     vector<int> Z(n);
     Z[0]=0;

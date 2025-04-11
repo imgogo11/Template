@@ -1,13 +1,11 @@
 constexpr int N = 1e6 + 10;
-struct BLK
-{
+struct BLK {
     int B,n;
     vector<int> id;
     vector<int> pos; 
     BLK() : B{}, n{}, id{} {}
     BLK(int n) :BLK() {init(n);}
-    void init(int n)
-    {
+    void init(int n) {
         this->n=n;
         this->B=(int)pow(n,2.0/3);
         id.resize(n+1);
@@ -15,24 +13,21 @@ struct BLK
         for(int i=1;i<=n;i++)
             id[i]=(i-1)/B+1;
     }
-    bool del_l(int &x,int val)
-    {
+    bool del_l(int &x,int val) {
         x+=1;
         bool ischange=false;
         pos[val]-=1;
         if(!pos[val]) ischange=true;
         return ischange;
     }
-    bool del_r(int &x,int val)
-    {
+    bool del_r(int &x,int val) {
         x-=1;
         bool ischange=false;
         pos[val]-=1;
         if(!pos[val]) ischange=true;
         return ischange;
     }
-    int del_t(int &x,int &val1,int &val2)
-    {
+    int del_t(int &x,int &val1,int &val2) {
         x-=1;
         int ischange=0;
         if(val1==val2) return ischange;
@@ -42,24 +37,21 @@ struct BLK
         swap(val1,val2);
         return ischange;
     }
-    bool add_l(int &x,int val)
-    {
+    bool add_l(int &x,int val) {
         x-=1;
         bool ischange=false;
         if(!pos[val]) ischange=true;
         pos[val]+=1;
         return ischange;
     }
-    bool add_r(int &x,int val)
-    {
+    bool add_r(int &x,int val) {
         x+=1;
         bool ischange=false;
         if(!pos[val]) ischange=true;
         pos[val]+=1;
         return ischange;
     }
-    int add_t(int &x,int &val1,int &val2)
-    {
+    int add_t(int &x,int &val1,int &val2) {
         x+=1;
         int ischange=0;
         if(val1==val2) return ischange;
@@ -70,8 +62,7 @@ struct BLK
         return ischange;
     }
 };
-void solve()
-{
+void solve() {
     int n,q,time=0,tot=0,L,R;
     char op;
     cin>>n>>q;
@@ -84,16 +75,13 @@ void solve()
     vector<int> t(q+1);
     vector<int> p(q+1);
     vector<int> after(q+1);
-    for(int i=1;i<=q;i++)
-    {
+    for(int i=1;i<=q;i++) {
         cin>>op>>L>>R;
-        if(op=='Q')
-        {
+        if(op=='Q') {
             t[++tot]=time;
             l[tot]=L,r[tot]=R;
         }
-        else
-        {
+        else {
             time+=1;
             p[time]=L,after[time]=R;
         }
@@ -109,38 +97,31 @@ void solve()
         return t[R1]<t[R2];
     });
     int nl=1,nr=0,nt=0,cnt=0;
-    for(int i=1;i<=tot;i++)
-    {
+    for(int i=1;i<=tot;i++) {
         int now=idx[i];
-        while(nr<n && nr<r[now])
-        {
+        while(nr<n && nr<r[now]) {
             if(B.add_r(nr,a[nr+1]))
                 cnt+=1;
         }
-        while(nl>1 && nl>l[now])
-        {
+        while(nl>1 && nl>l[now]) {
             if(B.add_l(nl,a[nl-1]))
                 cnt+=1;
         }
-        while(nl<=n && nl<l[now])
-        {
+        while(nl<=n && nl<l[now]) {
             if(B.del_l(nl,a[nl]))
                 cnt-=1;
         }
-        while(nr>=1 && nr>r[now])
-        {
+        while(nr>=1 && nr>r[now]) {
             if(B.del_r(nr,a[nr]))
                 cnt-=1;
         }
-        while(nt<time && nt<t[now])
-        {
+        while(nt<time && nt<t[now]) {
             if(p[nt+1]>nr || p[nt+1]<nl)
                 swap(a[p[nt+1]],after[nt+1]),nt+=1;
             else
                 cnt+=B.add_t(nt,a[p[nt+1]],after[nt+1]);
         }
-        while(nt>=1 && nt>t[now])
-        {
+        while(nt>=1 && nt>t[now]) {
             if(p[nt]>nr || p[nt]<nl)
                 swap(a[p[nt]],after[nt]),nt-=1;
             else

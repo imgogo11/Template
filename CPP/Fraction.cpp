@@ -1,5 +1,4 @@
-struct frac
-{
+struct frac {
     ll x,y;
     frac(): x(0), y(1){}
     frac(ll x,ll y) {

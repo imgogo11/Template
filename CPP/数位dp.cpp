@@ -1,6 +1,5 @@
 ll S[20], cnt, dp[20][180];
-// ll dfs(int pos, int last, int limit, int sum)
-// {
+// ll dfs(int pos, int last, int limit, int sum) {
 //     ll ans = 0;
 //     if (!pos) return sum;
 //     auto &d = dp[pos][last][limit][sum];
@@ -11,8 +10,7 @@ ll S[20], cnt, dp[20][180];
 //     d = ans;
 //     return ans;
 // }
-ll dfs(int pos, int limit, int sum)
-{
+ll dfs(int pos, int limit, int sum) {
     ll ans = 0;
     if (!pos) return sum;
     auto &d = dp[pos][sum];
@@ -23,8 +21,7 @@ ll dfs(int pos, int limit, int sum)
     if (!limit) d = ans;
     return ans;
 }
-ll F(ll x)
-{
+ll F(ll x) {
     int cnt = 0;
     // 不可复用记搜时  memset(dp, -1, sizeof(dp));
     while (x) {

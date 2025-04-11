@@ -1,14 +1,12 @@
 constexpr __int128 Mod=1000000000000000283LL;
 constexpr __int128 Base=1000000033;
 __int128 p[N];
-void init()
-{
+void init() {
     p[0]=1;
     for(int i=1;i<N;i++)
         p[i]=p[i-1]*Base%Mod;
 }
-struct Hash
-{
+struct Hash {
     vector<__int128> h;
     Hash(){}
     Hash(const string &s){init(s);}

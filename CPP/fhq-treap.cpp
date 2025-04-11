@@ -1,6 +1,5 @@
 mt19937 rng{chrono::steady_clock::now().time_since_epoch().count()};
-struct FHQ
-{
+struct FHQ {
     struct Node {
         int ls,rs,key,sz,val;
     };

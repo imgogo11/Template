@@ -1,6 +1,5 @@
 int pmt[N],pos[N],cnt;
-void get_pmt(string& s)
-{
+void get_pmt(string& s) {
     memset(pmt,0,sizeof(int)*(s.size()+5));
     for(int i=1,j=0;i<s.size();i++)
     {
@@ -11,8 +10,7 @@ void get_pmt(string& s)
         pmt[i]=j;
     }
 }
-bool kmp(string& s,string& p)
-{
+bool kmp(string& s,string& p) {
     cnt=0;
     for(int i=0,j=0;i<s.size();i++)
     {

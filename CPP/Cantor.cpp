@@ -1,5 +1,4 @@
-int Cantor(vector<int> &a)
-{
+int Cantor(vector<int> &a) {
     int n=a.size()-1;
     Fenwick fw(n);
     vector<ll> fac(n+1);
@@ -16,8 +15,7 @@ int Cantor(vector<int> &a)
     }
     return (rank+1)%Mod;
 }
-vector<int> invCantor(int n,ll k)
-{
+vector<int> invCantor(int n,ll k) {
     vector<int> a;
     Fenwick fw(n);
     vector<ll> fac(n+1);

@@ -3,8 +3,7 @@ constexpr point_t eps = 1e-8;
 constexpr point_t inf = numeric_limits<point_t>::max();
 constexpr long double PI = acosl(-1.0);
 // 点与向量
-template<typename T> struct point
-{
+template<typename T> struct point {
     T x, y;
     bool operator==(const point &a) const {return (abs(x - a.x) <= eps && abs(y - a.y) <= eps);}
     bool operator<(const point &a) const {if (abs(x - a.x) <= eps) return y < a.y - eps; return x < a.x - eps;}
@@ -45,8 +44,7 @@ struct argcmp {
     }
 };
 // 直线
-template<typename T> struct line
-{
+template<typename T> struct line {
     point<T> p, v; // p 为直线上一点，v 为方向向量
     bool operator==(const line &a) const {return v.toleft(a.v) == 0 && v.toleft(p - a.p) == 0;}
     int toleft(const point<T> &a) const {return v.toleft(a - p);} // to-left 测试
@@ -63,8 +61,7 @@ template<typename T> struct line
 };
 using Line = line<point_t>;
 //线段
-template<typename T> struct segment
-{
+template<typename T> struct segment {
     point<T> a, b;
     bool operator<(const segment &s) const {return make_pair(a, b) < make_pair(s.a, s.b);}
     // 判定性函数建议在整数域使用
@@ -102,8 +99,7 @@ template<typename T> struct segment
 };
 using Segment = segment<point_t>;
 // 多边形
-template<typename T> struct polygon
-{
+template<typename T> struct polygon {
     vector<point<T>> p;  // 以逆时针顺序存储
     size_t nxt(const size_t i) const {return i == p.size() - 1 ? 0 : i + 1;}
     size_t pre(const size_t i) const {return i == 0 ? p.size() - 1 : i - 1;}
@@ -141,8 +137,7 @@ template<typename T> struct polygon
 };
 using Polygon = polygon<point_t>;
 //凸多边形
-template<typename T> struct convex: polygon<T>
-{
+template<typename T> struct convex: polygon<T> {
     // 闵可夫斯基和
     convex operator+(const convex &c) const {
         const auto &p = this->p;
@@ -208,8 +203,7 @@ template<typename T> struct convex: polygon<T>
     // 判断点是否在凸多边形内
     // 复杂度 O(logn)
     // -1 点在多边形边上 | 0 点在多边形外 | 1 点在多边形内
-    int is_in(const point<T> &a) const
-    {
+    int is_in(const point<T> &a) const {
         const auto &p = this->p;
         if (p.size() == 1) return a == p[0] ? -1 : 0;
         if (p.size() == 2) return segment<T> {p[0], p[1]} .is_on(a) ? -1 : 0;
@@ -225,8 +219,7 @@ template<typename T> struct convex: polygon<T>
     // 凸多边形关于某一方向的极点
     // 复杂度 O(logn)
     // 参考资料：https://codeforces.com/blog/entry/48868
-    template<typename F> size_t extreme(const F &dir) const
-    {
+    template<typename F> size_t extreme(const F &dir) const {
         const auto &p = this->p;
         const auto check = [&](const size_t i) {return dir(p[i]).toleft(p[this->nxt(i)] - p[i]) >= 0;};
         const auto dir0 = dir(p[0]); const auto check0 = check(0);
@@ -245,16 +238,14 @@ template<typename T> struct convex: polygon<T>
     // 过凸多边形外一点求凸多边形的切线，返回切点下标
     // 复杂度 O(logn)
     // 必须保证点在多边形外
-    pair<size_t, size_t> tangent(const point<T> &a) const
-    {
+    pair<size_t, size_t> tangent(const point<T> &a) const {
         const size_t i = extreme([&](const point<T> &u) {return u - a;});
         const size_t j = extreme([&](const point<T> &u) {return a - u;});
         return {i, j};
     }
     // 求平行于给定直线的凸多边形的切线，返回切点下标
     // 复杂度 O(logn)
-    pair<size_t, size_t> tangent(const line<T> &a) const
-    {
+    pair<size_t, size_t> tangent(const line<T> &a) const {
         const size_t i = extreme([&](...) {return a.v;});
         const size_t j = extreme([&](...) {return -a.v;});
         return {i, j};

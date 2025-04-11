@@ -1,5 +1,4 @@
-void mergesort(int l,int r)
-{
+void mergesort(int l,int r) {
     if(l>=r)
         return;
     mergesort(l,(l+r)/2);

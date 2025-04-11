@@ -4,8 +4,7 @@ constexpr ll inf=5e18;
 ll sqr(ll x){return x*x;}
 ll dis(int l,int r){return sqr(a[l].x-a[r].x)+sqr(a[l].y-a[r].y);}
 bool cmp(Point a,Point b){return a.x==b.x?a.y<b.y:a.x<b.x;}
-void merge(int l,int r)
-{
+void merge(int l,int r) {
     int mid=(l+r)>>1,i=l,j=mid+1;//归并
     for(int k=l;k<=r;k++) {
         if(i<=mid && (j>r || a[i].y<a[j].y)) tmp[k]=a[i++];
@@ -13,8 +12,7 @@ void merge(int l,int r)
     }
     for(int i=l;i<=r;i++) a[i]=tmp[i];
 }
-ll mergeblock(int l,int r)
-{
+ll mergeblock(int l,int r) {
     if(l>=r) return inf;
     if(l+1==r) {
         if(a[l].y>a[r].y) swap(a[l],a[r]);
@@ -31,8 +29,7 @@ ll mergeblock(int l,int r)
             d=min(d,dis(b[j],b[i]));
     return d;
 }
-void solve()
-{
+void solve() {
     cin>>n;
     for(int i=1;i<=n;i++) cin>>a[i].x>>a[i].y;
     sort(a+1,a+n+1,cmp);
